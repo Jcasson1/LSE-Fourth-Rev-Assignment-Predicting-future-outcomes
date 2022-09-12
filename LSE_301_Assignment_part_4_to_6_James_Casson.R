@@ -119,6 +119,14 @@ qplot(EU_Sales_sum, colour=I("red"),data=Sales_Impact, geom='boxplot')
 qplot(Global_Sales_sum, colour=I("red"),data=Sales_Impact, geom='boxplot')
 
 ###############################################################################
+
+# 4. Observations and insights
+# Your observations and insights here...
+#boxplots are the best to compare game sales, followed by scatter plots
+#box plots allow us to compare the outliers better as well as the main body of 
+#the data. Scatterplots allow us to compare the relationships of the different
+#data together and see if a line of correlation could fit.
+###############################################################################
 ###############################################################################
 
 
@@ -285,7 +293,11 @@ corrplot::corrplot(cor(Sales_Impact), method=c("color"))
 
 # 4. Observations and insights
 # Your observations and insights here...
-
+#The data wasn't particularly reliable by itself, but the log version of the
+#data was much more reliable, and it's a simple function meaning not much of 
+#the dat was changed.
+#NA_Sales and EU_Sales have a positive correlation with Global_Sales, meaning
+#they could potentially accurately predict one given the other 2.
 
 ###############################################################################
 
@@ -370,7 +382,7 @@ plot(Sales_Impact_lnreg_reg3)
 
 # 3. Create a multiple linear regression model
 # Select only numeric columns from the original data frame.
-mlr_data <- subset(Sales_Impact, select =-c(log_NA_Sales_sum, log_EU_Sales_sum,
+mlr_data <- subset(Sales_Impact, select =-c(Product,log_NA_Sales_sum, log_EU_Sales_sum,
                                             log_Global_Sales_sum))
 colnames(mlr_data)
 str(mlr_data)
@@ -395,59 +407,59 @@ plot(mlr_data)
 #NA_Sales_sum of 22.08 and EU_Sales_sum of 0.52.
 
 #Example A
-Product <- 107
+
 NA_Sales_sum <- c(34.02)
 EU_Sales_sum <- c(23.80)
-predict_data <- data.frame(Product, NA_Sales_sum, EU_Sales_sum)
+predict_data <- data.frame( NA_Sales_sum, EU_Sales_sum)
 
 #predict
 predict(model_mlr, newdata = predict_data)
-#Predicted value is 66.3587, which is close to the observed value of 67.85
+#Predicted value is 68.05655, which is close to the observed value of 67.85
 
 # Compare with observed values for a number of records.
 #Example B
-Product <- 99
+
 NA_Sales_sum <- c(3.93)
 EU_Sales_sum <- c(1.56)
-predict_data <- data.frame(Product, NA_Sales_sum, EU_Sales_sum)
+predict_data <- data.frame( NA_Sales_sum, EU_Sales_sum)
 
 #predict
 predict(model_mlr, newdata = predict_data)
-#predicted value is 8.4309 
+#predicted value is 7.35674 
 
 #Example C
-Product <- 109
+
 NA_Sales_sum <- c(2.73)
 EU_Sales_sum <- c(0.65)
-predict_data <- data.frame(Product, NA_Sales_sum, EU_Sales_sum)
+predict_data <- data.frame( NA_Sales_sum, EU_Sales_sum)
 
 #predict
 predict(model_mlr, newdata = predict_data)
-#Predicted value of 6.091136,which is a little bit over the observed value of 
+#Predicted value of 4.908353,which is a little bit over the observed value of 
 #4.32
 
 #Example D
-Product <- 111
+
 NA_Sales_sum <- c(2.26)
 EU_Sales_sum <- c(0.97)
-predict_data <- data.frame(Product, NA_Sales_sum, EU_Sales_sum)
+predict_data <- data.frame( NA_Sales_sum, EU_Sales_sum)
 
 #predict
 predict(model_mlr, newdata = predict_data)
-#Predicted value of 5.959651, which is close to the observed value of 6.12,
-#however the observed value had a different NA_Sales_sum.
+#Predicted value of 4.761039, which is close to the observed value of 6.12,
+#however the observed value had a different NA_Sales_sum, which was 4.42.
 
 
 
 #Example E
-Product <- 105
+
 NA_Sales_sum <- c(22.08)
 EU_Sales_sum <- c(0.52)
-predict_data <- data.frame(Product, NA_Sales_sum, EU_Sales_sum)
+predict_data <- data.frame( NA_Sales_sum, EU_Sales_sum)
 
 #predict
 predict(model_mlr, newdata = predict_data)
-#Predicted value of 26.60963, which is above the observed value of 23.21
+#Predicted value of 26.62556, which is above the observed value of 23.21
 
 
 
@@ -455,17 +467,12 @@ predict(model_mlr, newdata = predict_data)
 
 # 5. Observations and insights
 # Your observations and insights here...
-
+#This shows that the predicted value will either be very close to the observed
+#value or just above it, which means taking it into account leads to accurately 
+#predicting the market
 
 ###############################################################################
 ###############################################################################
-
-
-
-
-
-
-
 
 
 
